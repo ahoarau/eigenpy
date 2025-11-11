@@ -102,6 +102,18 @@ clean = { cmd = "rm -rf build" }
 test = { cmd = "ctest --test-dir build --output-on-failure", depends-on = [
   "build",
 ] }
+test-packaging = { cmd = [
+  "cmake",
+  "-G",
+  "Ninja",
+  "-B",
+  "build_unittest_packaging",
+  "-S",
+  "unittest/packaging/cmake",
+  "-DCMAKE_PREFIX_PATH=$CONDA_PREFIX",
+], depends-on = [
+  "install",
+] }
 
 [feature.lint]
 dependencies = { pre-commit = ">=3.6.2" }

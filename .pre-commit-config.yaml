@@ -3,8 +3,13 @@ ci:
   autofix_prs: false
   autoupdate_schedule: quarterly
 repos:
+repos:
+- repo: https://github.com/BlankSpruce/gersemi
+  rev: 0.23.1
+  hooks:
+  - id: gersemi
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.13.3
+  rev: v0.14.4
   hooks:
   - id: ruff
     args:
@@ -13,17 +18,13 @@ repos:
     - --ignore
     - UP036
   - id: ruff-format
-- repo: https://github.com/cheshirekow/cmake-format-precommit
-  rev: v0.6.13
-  hooks:
-  - id: cmake-format
 - repo: https://github.com/pappasam/toml-sort
   rev: v0.24.3
   hooks:
   - id: toml-sort-fix
     exclude: pixi.toml|dockgen.toml
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: v21.1.2
+  rev: v21.1.5
   hooks:
   - id: clang-format
 - repo: https://github.com/pre-commit/pre-commit-hooks

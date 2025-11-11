@@ -1,4 +1,10 @@
 *~
 *build*/
+install*/
+.cache/
 # pixi environments
 .pixi
+.ruff_cache/
+__pycache__/
+.DS_Store
+

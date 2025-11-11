@@ -86,20 +86,28 @@ configure = { cmd = [
   "-G",
   "Ninja",
   "-B",
-  "build",
+  "build/$EIGENPY_BUILD_TYPE",
   "-S",
   ".",
   # Don't use standard layout because it's not well implemented on Windows
   "-DPYTHON_STANDARD_LAYOUT=OFF",
+  "-DCMAKE_UTILS_DIR=$CMAKE_UTILS_DIR",
   "-DCMAKE_INSTALL_PREFIX=$CONDA_PREFIX",
   "-DCMAKE_BUILD_TYPE=$EIGENPY_BUILD_TYPE",
+  "-DBUILD_TESTING=ON",
+  "-DBUILD_TESTING_SCIPY=ON",
   "-DGENERATE_PYTHON_STUBS=$EIGENPY_PYTHON_STUBS",
   "-DBUILD_WITH_CHOLMOD_SUPPORT=$EIGENPY_CHOLMOD_SUPPORT",
   "-DBUILD_WITH_ACCELERATE_SUPPORT=$EIGENPY_ACCELERATE_SUPPORT",
 ] }
-build = { cmd = "cmake --build build --target all", depends-on = ["configure"] }
-clean = { cmd = "rm -rf build" }
-test = { cmd = "ctest --test-dir build --output-on-failure", depends-on = [
+build = { cmd = "cmake --build build/$EIGENPY_BUILD_TYPE --target all", depends-on = [
+  "configure",
+] }
+clean = { cmd = "rm -rf build/$EIGENPY_BUILD_TYPE" }
+test = { cmd = "ctest --test-dir build/$EIGENPY_BUILD_TYPE --output-on-failure", depends-on = [
+  "build",
+] }
+install = { cmd = "cmake --build build/$EIGENPY_BUILD_TYPE --target install", depends-on = [
   "build",
 ] }
 test-packaging = { cmd = [
@@ -133,8 +141,6 @@ configure-new-version = { cmd = [
   "build_new_version",
   "-S",
   ".",
-  # Don't use standard layout because it's not well implemented on Windows
-  "-DPYTHON_STANDARD_LAYOUT=OFF",
   "-DCMAKE_INSTALL_PREFIX=$CONDA_PREFIX",
   "-DCMAKE_BUILD_TYPE=$EIGENPY_BUILD_TYPE",
   "-DGENERATE_PYTHON_STUBS=ON",

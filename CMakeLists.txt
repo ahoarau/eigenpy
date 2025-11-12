@@ -3,10 +3,10 @@
 #
 cmake_minimum_required(VERSION 3.22...4.1)
 
-if(CMAKE_UTILS_DIR)
-  add_subdirectory(${CMAKE_UTILS_DIR} cmake-utils)
+if(CMAKE_UTILS_SOURCE_DIR)
+  add_subdirectory(${CMAKE_UTILS_SOURCE_DIR} cmake-utils)
 else()
-  find_package(cmake-utils 0.1.0 CONFIG REQUIRED)
+  find_package(cmake-helpers 0.2.0 CONFIG REQUIRED)
 endif()
 
 project(
@@ -46,7 +46,7 @@ endif()
 # ----------------------------------------------------
 # --- DEPENDENCIES -----------------------------------
 # ----------------------------------------------------
-xxx_find_package(Eigen3 3.4.0 CONFIG REQUIRED)
+xxx_find_package(Eigen3 CONFIG REQUIRED)
 
 xxx_find_package(Python 3.8 REQUIRED COMPONENTS Interpreter Development.Module NumPy)
 xxx_find_package(Boost CONFIG REQUIRED COMPONENTS python numpy)

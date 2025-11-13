@@ -17,6 +17,7 @@ function(eigenpy_add_test name)
   boostpy_add_module(${name} ${name}.cpp)
   target_link_libraries(${name} PRIVATE eigenpy)
   xxx_target_set_default_compile_options(${name} PRIVATE)
+  xxx_target_enforce_msvc_conformance(${name} PRIVATE)
   add_dependencies(eigenpy_tests ${name})
 
   set_target_properties(

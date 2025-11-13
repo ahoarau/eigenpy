@@ -12,11 +12,14 @@ function(eigenpy_python_add_test name)
   set(test_name "Eigenpy: test_${name}.py")
   add_test(
     NAME ${test_name}
-    COMMAND 
-      ${CMAKE_COMMAND} -E env "PYTHONPATH=${CMAKE_CURRENT_BINARY_DIR};${CMAKE_BINARY_DIR}/lib/site-packages"
-      $<TARGET_FILE:Python::Interpreter> ${script_path}
+    COMMAND $<TARGET_FILE:Python::Interpreter> ${script_path}
   )
-  set_tests_properties(${test_name} PROPERTIES DEPENDS eigenpy_pywrap)
+  set_tests_properties(
+    ${test_name}
+    PROPERTIES
+      ENVIRONMENT PYTHONPATH=$<TARGET_FILE_DIR:eigenpy_pywrap>/..
+    DEPENDS eigenpy_pywrap
+  )
 endfunction()
 
 eigenpy_python_add_test(dimensions)

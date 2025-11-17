@@ -1,24 +1,9 @@
-if(PYTHON_BINDING_CUSTOM_INSTALL_DIR)
-  set(PYTHON_BINDING_INSTALL_DIR ${PYTHON_BINDING_CUSTOM_INSTALL_DIR})
-  message(
-    STATUS
-    "[${PROJECT_NAME}] Using custom python binding install dir: ${PYTHON_BINDING_INSTALL_DIR}"
-  )
-else()
-  set(PYTHON_BINDING_INSTALL_DIR "${Python_SITELIB}")
-  message(
-    STATUS
-    "[${PROJECT_NAME}] Using default python binding install dir: ${PYTHON_BINDING_INSTALL_DIR}"
-  )
-endif()
-
 boostpy_add_module(eigenpy_pywrap bindings.cpp)
 target_link_libraries(eigenpy_pywrap PRIVATE eigenpy)
 xxx_target_set_default_compile_options(eigenpy_pywrap PRIVATE)
-
-set_target_properties(
+xxx_target_set_output_directory(
   eigenpy_pywrap
-  PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib/site-packages/eigenpy
+  ${CMAKE_BINARY_DIR}/lib/site-packages/eigenpy
 )
 
 xxx_python_generate_init_py(
@@ -37,9 +22,10 @@ boostpy_add_stubs(
 
 xxx_python_compile_all(DIRECTORY ${CMAKE_BINARY_DIR}/lib/site-packages/eigenpy)
 
+xxx_python_compute_install_dir(python_install_dir)
 install(
   DIRECTORY ${CMAKE_BINARY_DIR}/lib/site-packages/eigenpy
-  DESTINATION ${PYTHON_BINDING_INSTALL_DIR}
+  DESTINATION ${python_install_dir}
   FILES_MATCHING
   PATTERN "*.py"
   PATTERN "*.pyc"

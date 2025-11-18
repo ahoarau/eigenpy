@@ -6,10 +6,7 @@ function(eigenpy_add_test name)
   xxx_target_set_default_compile_options(${name} PRIVATE)
   xxx_target_enforce_msvc_conformance(${name} PRIVATE)
 
-  set_target_properties(
-    ${name}
-    PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${name}
-  )
+  xxx_target_set_output_directory(${name} ${CMAKE_CURRENT_BINARY_DIR}/${name})
 
   xxx_python_generate_init_py(
       ${name}

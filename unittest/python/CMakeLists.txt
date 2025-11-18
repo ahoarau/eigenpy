@@ -10,15 +10,10 @@ function(eigenpy_python_add_test name)
   endif()
 
   set(test_name "Eigenpy: test_${name}.py")
-  add_test(
-    NAME ${test_name}
-    COMMAND $<TARGET_FILE:Python::Interpreter> ${script_path}
-  )
+  add_test(NAME ${test_name} COMMAND $<TARGET_FILE:Python::Interpreter> ${script_path})
   set_tests_properties(
     ${test_name}
-    PROPERTIES
-      ENVIRONMENT PYTHONPATH=$<TARGET_FILE_DIR:eigenpy_pywrap>/..
-    DEPENDS eigenpy_pywrap
+    PROPERTIES ENVIRONMENT PYTHONPATH=$<TARGET_FILE_DIR:eigenpy_pywrap>/.. DEPENDS eigenpy_pywrap
   )
 endfunction()
 

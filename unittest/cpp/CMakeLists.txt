@@ -23,7 +23,11 @@ function(eigenpy_add_test name)
     NAME ${test_name}
     COMMAND $<TARGET_FILE:Python::Interpreter> ${CMAKE_CURRENT_SOURCE_DIR}/test_${name}.py
   )
-  set_tests_properties(${test_name} PROPERTIES DEPENDS ${name})
+  set_tests_properties(${test_name} PROPERTIES 
+    ENVIRONMENT
+      "PYTHONPATH=$<TARGET_FILE_DIR:${name}>"
+    DEPENDS ${name}
+  )
 endfunction()
 
 eigenpy_add_test(matrix)

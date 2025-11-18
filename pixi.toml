@@ -117,7 +117,7 @@ test-packaging = { cmd = [
   "-G",
   "Ninja",
   "-B",
-  "build_unittest_packaging",
+  "build/unittest_packaging",
   "-S",
   "unittest/packaging/cmake",
   "-DCMAKE_PREFIX_PATH=$CONDA_PREFIX",
@@ -193,7 +193,7 @@ cmake = ">=3.22"
 python = "*"
 
 [feature.test-pixi-build.tasks]
-test-cmake = "cmake -S unittest/packaging/cmake -B build_test_pixi_build"
+test-cmake = "cmake -S unittest/packaging/cmake -B build/test_pixi_build"
 test-python = "python -c 'import eigenpy'"
 test = { depends-on = ["test-cmake", "test-python"] }
 

@@ -1,7 +1,10 @@
 # Add test that depends on the python wrapper of eigenpy library
 # Those tests can import eigenpy
 function(eigenpy_python_add_test name)
-  cmake_parse_arguments(PARSE_ARGV 1 arg "" "SCRIPT" "")
+  set(options)
+  set(oneValueArgs SCRIPT)
+  set(multiValueArgs)
+  cmake_parse_arguments(arg "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
   if(arg_SCRIPT)
     set(script_path ${arg_SCRIPT})

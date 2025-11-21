@@ -1,10 +1,7 @@
 boostpy_add_module(eigenpy_pywrap bindings.cpp)
 target_link_libraries(eigenpy_pywrap PRIVATE eigenpy)
 xxx_target_set_default_compile_options(eigenpy_pywrap PRIVATE)
-xxx_target_set_output_directory(
-  eigenpy_pywrap
-  ${CMAKE_BINARY_DIR}/lib/site-packages/eigenpy
-)
+xxx_target_set_output_directory(eigenpy_pywrap OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib/site-packages/eigenpy)
 
 xxx_python_generate_init_py(
   eigenpy_pywrap OUTPUT_PATH

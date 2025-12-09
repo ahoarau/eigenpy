@@ -1,7 +1,7 @@
 # Add test that depends on the eigenpy library
 # import eigenpy is not authorized in those tests
 function(eigenpy_add_test name)
-  boostpy_add_module(${name} ${name}.cpp)
+  xxx_boostpy_add_module(${name} ${name}.cpp)
   target_link_libraries(${name} PRIVATE eigenpy)
   xxx_target_set_default_compile_options(${name} PRIVATE)
   xxx_target_enforce_msvc_conformance(${name} PRIVATE)

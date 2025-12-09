@@ -1,4 +1,4 @@
-boostpy_add_module(eigenpy_pywrap bindings.cpp)
+xxx_boostpy_add_module(eigenpy_pywrap bindings.cpp)
 target_link_libraries(eigenpy_pywrap PRIVATE eigenpy)
 xxx_target_set_default_compile_options(eigenpy_pywrap PRIVATE)
 xxx_target_set_output_directory(eigenpy_pywrap OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib/site-packages/eigenpy)
@@ -8,7 +8,7 @@ xxx_python_generate_init_py(
   ${CMAKE_BINARY_DIR}/lib/site-packages/eigenpy/__init__.py
 )
 
-boostpy_add_stubs(
+xxx_boostpy_add_stubs(
   eigenpy_pywrap_stubs
   MODULE eigenpy.eigenpy_pywrap
   OUTPUT ${CMAKE_BINARY_DIR}/lib/site-packages

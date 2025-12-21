@@ -39,7 +39,7 @@ jobs:
     name: Check configuration with jrl dir passed in the cmake command line
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout
+      - uses: actions/checkout@v6
         with:
           repository: ahoarau/jrl-cmakemodules
           ref: jrl-next

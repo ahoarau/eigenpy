@@ -33,6 +33,17 @@ endif()
 message(STATUS "Looking for jrl-cmakemodules (version: >=1.1.2) package...")
 find_package(jrl-cmakemodules 1.1.2 CONFIG QUIET)
 
+# Verify that the v2 directory exists (might not have been released yet)
+if(jrl-cmakemodules_FOUND)
+  if(NOT EXISTS ${jrl-cmakemodules_DIR}/../../jrl-cmakemodules/v2)
+    message(
+      WARNING
+      "jrl-cmakemodules found (version: ${jrl-cmakemodules_VERSION}) at '${jrl-cmakemodules_DIR}', but v2 directory is missing. Ignoring this installation."
+    )
+    unset(jrl-cmakemodules_FOUND)
+  endif()
+endif()
+
 # If we have the package, we are done here.
 if(jrl-cmakemodules_FOUND)
   message(STATUS "Found jrl-cmakemodules (version: ${jrl-cmakemodules_VERSION}) package.")

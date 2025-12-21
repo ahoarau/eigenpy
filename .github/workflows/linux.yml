@@ -33,12 +33,14 @@ jobs:
       fail-fast: false
       matrix:
         ubuntu: [22, 24]
+    env:
+      CMAKE_BUILD_PARALLEL_LEVEL: 2
     steps:
       - uses: actions/checkout@v6
       - run: |
           sudo apt-get update
           sudo apt-get install cmake ninja-build libboost-all-dev libeigen3-dev python3-numpy python3-dev python3-scipy
-      - run: cmake -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING_SCIPY=ON
+      - run: cmake -G Ninja -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING_SCIPY=ON
       - run: cmake --build build
       - run: ctest --test-dir build --output-on-failure
 
